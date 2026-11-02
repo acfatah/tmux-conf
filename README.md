@@ -1,5 +1,18 @@
 # tmux-conf
 
+<p>
+  <a href="./LICENSE">
+    <img
+      alt="License"
+      src="https://img.shields.io/github/license/acfatah/tmux-conf?style=flat-square"
+    ></a>
+  <a href="https://github.com/acfatah/tmux-conf/commits/main">
+    <img
+      alt="Last commit"
+      src="https://img.shields.io/github/last-commit/acfatah/tmux-conf?display_timestamp=committer&style=flat-square"
+    ></a>
+</p>
+
 My tmux configuration, tuned for WSL and for working with Claude Code in
 tmux.
 
