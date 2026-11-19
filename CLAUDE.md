@@ -38,11 +38,13 @@ Order in `tmux.conf` matters:
    resurrect `last` symlink is repaired before continuum's auto-restore fires.
 3. **The `C-a` prefix** must be set before TPM: tmux-sensible reads the prefix
    at load time and binds `prefix a` to last-window.
-4. **`run '~/.tmux/plugins/tpm/tpm'`** loads the plugins.
-5. **Plain options after the TPM line** (pane styles, the clipboard binding,
-   titles, auto naming, pane borders). They sit after TPM so they override
-   anything tmux-sensible sets. Despite the "keep at the very bottom" comment
-   on the TPM line, new non-plugin settings belong here.
+4. **Plain options** (pane styles, the clipboard binding, titles, auto naming,
+   pane borders) come next. tmux-sensible does not touch any of them, and it
+   mostly sets options only when they still hold tmux's default, so placing
+   them before TPM costs nothing.
+5. **`run '~/.tmux/plugins/tpm/tpm'`** stays the last line. tmux-continuum
+   appends its autosave trigger to `status-right` when it loads, so a
+   `status-right` or theme set after this line would silently stop autosaves.
 
 ### Session persistence
 
