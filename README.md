@@ -33,6 +33,10 @@ tmux.
   selections. `clipboard-copy.sh` picks the tool: `clip.exe` on WSL, then
   `wl-copy`, `xclip` or `xsel` on plain Linux.
 - **Terminal tab title** set to `<session>: <current path>`.
+- **Dims unfocused windows.** Each terminal window running tmux fades when
+  another window or app has focus: grey text and status bar, lighter pane
+  backgrounds and a faded active border. The window in use stays bright, so
+  stray keys such as `Ctrl-a` are less likely to go to the wrong app.
 
 ## Files
 
@@ -41,6 +45,7 @@ tmux.
 | `tmux.conf` | The configuration; `~/.tmux.conf` links here |
 | `resurrect-fix-last.sh` | Repairs resurrect's `last` symlink; `~/.tmux/resurrect-fix-last.sh` links here |
 | `clipboard-copy.sh` | Copies stdin to the system clipboard; `~/.tmux/clipboard-copy.sh` links here |
+| `focus-dim.sh` | Dims or undims a session on focus changes; `~/.tmux/focus-dim.sh` links here |
 | `docs/persist-sessions.md` | Guide to persisting sessions with resurrect and continuum |
 
 ## Install
@@ -59,6 +64,7 @@ tmux.
    ln -s ~/personal/tmux-conf/tmux.conf ~/.tmux.conf
    ln -s ~/personal/tmux-conf/resurrect-fix-last.sh ~/.tmux/resurrect-fix-last.sh
    ln -s ~/personal/tmux-conf/clipboard-copy.sh ~/.tmux/clipboard-copy.sh
+   ln -s ~/personal/tmux-conf/focus-dim.sh ~/.tmux/focus-dim.sh
    ```
 
 3. Start tmux, then press `prefix` + `I` (capital i) to install the plugins.
@@ -76,7 +82,7 @@ tmux set -w automatic-rename on
 ## Gotchas
 
 - **The links depend on the repo path.** If you move the repo, re-create all
-  three symlinks.
+  four symlinks.
 - **Some tools replace symlinks.** `cp` onto `~/.tmux.conf`, or an editor
   that saves by writing a new file, turns the link into a regular file, and
   the repo stops seeing changes.
