@@ -12,6 +12,7 @@ repo:
 - `~/.tmux.conf` -> `tmux.conf`
 - `~/.tmux/resurrect-fix-last.sh` -> `resurrect-fix-last.sh`
 - `~/.tmux/clipboard-copy.sh` -> `clipboard-copy.sh`
+- `~/.tmux/focus-dim.sh` -> `focus-dim.sh`
 
 So an edit here is live as soon as the config is reloaded. Never `cp` over
 those paths; that replaces the symlink and the repo stops seeing changes.
@@ -24,6 +25,7 @@ tmux source ~/.tmux.conf               # reload the live config (inside tmux)
 shellcheck resurrect-fix-last.sh       # lint the repair script
 bash -n resurrect-fix-last.sh          # syntax check the repair script
 shellcheck clipboard-copy.sh           # lint the clipboard script
+shellcheck focus-dim.sh                # lint the focus dim script
 tmux display -p '<format>'             # evaluate a format string in the current pane
 ```
 
