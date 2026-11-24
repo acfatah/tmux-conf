@@ -11,6 +11,7 @@ repo:
 
 - `~/.tmux.conf` -> `tmux.conf`
 - `~/.tmux/resurrect-fix-last.sh` -> `resurrect-fix-last.sh`
+- `~/.tmux/clipboard-copy.sh` -> `clipboard-copy.sh`
 
 So an edit here is live as soon as the config is reloaded. Never `cp` over
 those paths; that replaces the symlink and the repo stops seeing changes.
@@ -22,6 +23,7 @@ tmux source-file -n tmux.conf          # parse-only syntax check, applies nothin
 tmux source ~/.tmux.conf               # reload the live config (inside tmux)
 shellcheck resurrect-fix-last.sh       # lint the repair script
 bash -n resurrect-fix-last.sh          # syntax check the repair script
+shellcheck clipboard-copy.sh           # lint the clipboard script
 tmux display -p '<format>'             # evaluate a format string in the current pane
 ```
 
@@ -70,9 +72,10 @@ formats in step when changing either one.
 
 ## Platform assumptions
 
-- **WSL:** the copy-mode `y` binding pipes through `iconv` to UTF-16LE and
-  then to `clip.exe`. It runs under `sh -c`, so shell aliases are not
-  available there.
+- **Clipboard:** `copy-command` runs `clipboard-copy.sh`, which tries
+  `clip.exe` (through `iconv` to UTF-16LE) for WSL first, then `wl-copy`,
+  `xclip` and `xsel` for plain Linux. tmux runs it under `sh -c`, so shell
+  aliases are not available there.
 - **Prefix is `Ctrl-a`** in this config, while `docs/persist-sessions.md`
   is written for the default `Ctrl-b`.
 

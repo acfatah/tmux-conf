@@ -29,7 +29,9 @@ tmux.
   name.
 - **Pane border labels** with the pane's name and git branch, so split panes
   and forked Claude sessions stay distinguishable.
-- **Copy to the Windows clipboard** from vi copy mode (`y`), via `clip.exe`.
+- **Copy to the system clipboard** from vi copy mode (`y`) and from mouse
+  selections. `clipboard-copy.sh` picks the tool: `clip.exe` on WSL, then
+  `wl-copy`, `xclip` or `xsel` on plain Linux.
 - **Terminal tab title** set to `<session>: <current path>`.
 
 ## Files
@@ -38,6 +40,7 @@ tmux.
 | --- | --- |
 | `tmux.conf` | The configuration; `~/.tmux.conf` links here |
 | `resurrect-fix-last.sh` | Repairs resurrect's `last` symlink; `~/.tmux/resurrect-fix-last.sh` links here |
+| `clipboard-copy.sh` | Copies stdin to the system clipboard; `~/.tmux/clipboard-copy.sh` links here |
 | `docs/persist-sessions.md` | Guide to persisting sessions with resurrect and continuum |
 
 ## Install
@@ -55,6 +58,7 @@ tmux.
    mkdir -p ~/.tmux
    ln -s ~/personal/tmux-conf/tmux.conf ~/.tmux.conf
    ln -s ~/personal/tmux-conf/resurrect-fix-last.sh ~/.tmux/resurrect-fix-last.sh
+   ln -s ~/personal/tmux-conf/clipboard-copy.sh ~/.tmux/clipboard-copy.sh
    ```
 
 3. Start tmux, then press `prefix` + `I` (capital i) to install the plugins.
@@ -71,11 +75,13 @@ tmux set -w automatic-rename on
 
 ## Gotchas
 
-- **The links depend on the repo path.** If you move the repo, re-create both
-  symlinks.
+- **The links depend on the repo path.** If you move the repo, re-create all
+  three symlinks.
 - **Some tools replace symlinks.** `cp` onto `~/.tmux.conf`, or an editor
   that saves by writing a new file, turns the link into a regular file, and
   the repo stops seeing changes.
-- **WSL only:** the clipboard binding needs `clip.exe` on the Windows `PATH`.
+- **Clipboard tools:** on plain Linux, install `wl-copy` (package
+  `wl-clipboard`) for Wayland, or `xclip` or `xsel` for X11. Without any of
+  them, a copy still lands in tmux's paste buffer.
 - **The prefix is `Ctrl-a` here**, while the guide in `docs/` uses the
   default, `Ctrl-b`.
